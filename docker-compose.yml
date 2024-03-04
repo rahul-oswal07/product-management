@@ -1,0 +1,20 @@
+version: '3'
+services:
+  mssql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Password123!"
+      MSSQL_PID: Express
+    ports:
+      - "1433:1433"
+  adventure-app:
+    build: .
+    environment:
+      DatabaseServer: "mssql-server"
+      DatabasePort: "1433"
+      DatabaseUser: "SA"
+      DatabasePassword: "Password123!"
+      DatabaseName: "AdventureDb"
+    ports:
+      - "8090:80"
