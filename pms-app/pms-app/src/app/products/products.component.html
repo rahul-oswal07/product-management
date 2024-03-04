@@ -1,0 +1,42 @@
+<div>
+  <h5>Product List</h5>
+  <h6>Filter</h6>
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by name"
+      [(ngModel)]="filterName"
+    />
+  </div>
+  <div>
+    <button class="btn btn-primary" (click)="filterProducts()">Filter</button>
+    <button class="btn btn-secondary" (click)="resetFilter()">Reset</button>
+  </div>
+  <table class="table table-striped">
+    <tr>
+      <th>Sr.no</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let product of products$ | async; let i = index; product">
+      <td>{{ i + 1 }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.category }}</td>
+      <td>
+        <a class="btn btn-link" [routerLink]="[product.id, 'edit-product']"
+          >View</a
+        >
+        <a class="btn btn-link" [routerLink]="[product.id, 'edit-product']"
+          >Edit</a
+        >
+        <a class="btn btn-link" (click)="deleteCategory(product.id)">Delete</a>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -43,7 +43,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<IEnumerable<Product>> GetProductsAsync()
     {
-        return _applicationContext.Products.AsNoTracking();
+        return await _applicationContext.Products.ToListAsync();
     }
 
     public async Task<IEnumerable<Product>> GetProductsByCategory(string category)
